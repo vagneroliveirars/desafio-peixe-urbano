@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.1.1.RELEASE'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'br.com.peixeurbano'
+version = '1.0.0'
+description = 'Project responsible for deals and buy options'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+// Importing configurations
+apply from: "dependencies.gradle"
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    useJUnitPlatform()
+    dependsOn 'cleanTest'
+}
+
+tasks.withType(Test) {
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+        exceptionFormat "full"
+
+        afterSuite { desc, r ->
+            if (!desc.parent) { // will match the outermost suite
+                def output = "${r.resultType} (${r.testCount} tests, ${r.successfulTestCount} successes, ${r.failedTestCount} failures, ${r.skippedTestCount} skipped)"
+                def startItem = '| ', endItem = ' |'
+                def repeatLength = startItem.length() + output.length() + endItem.length()
+                println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+            }
+        }
+    }
+}
