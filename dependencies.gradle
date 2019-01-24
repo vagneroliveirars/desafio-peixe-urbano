@@ -1,7 +1,5 @@
 project.ext {
     springCloud_version = "Finchley.SR2"
-    junit5_version = "5.2.0"
-    junit5_runner_version = "1.2.0"
 }
 
 dependencies {
@@ -11,8 +9,10 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:$junit5_version")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit5_version")
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
