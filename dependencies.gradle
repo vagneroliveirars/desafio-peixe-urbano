@@ -1,5 +1,9 @@
 project.ext {
     springCloud_version = "Finchley.SR2"
+    springFox_version = "3.0.0-SNAPSHOT"
+    orika_version = "1.5.2"
+    flapdoodleEmbeddedMongoDB_version = "2.2.0"
+    randomBeans_version = "3.7.0"
 }
 
 dependencies {
@@ -11,7 +15,17 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
 
+    implementation("io.springfox:springfox-swagger2:$springFox_version")
+    implementation("io.springfox:springfox-swagger-ui:$springFox_version")
+    implementation("io.springfox:springfox-spring-webflux:$springFox_version")
+
+    implementation("ma.glasnost.orika:orika-core:$orika_version")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo:$flapdoodleEmbeddedMongoDB_version")
+
+    testImplementation("io.github.benas:random-beans:$randomBeans_version")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
