@@ -3,6 +3,7 @@ package br.com.peixeurbano.deals.dto;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class DealRequestDTO {
     private ZonedDateTime endDate;
 
     @NotNull
+    @PositiveOrZero
     private Long totalSold;
 
     @NotNull

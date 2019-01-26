@@ -3,7 +3,6 @@ package br.com.peixeurbano.deals.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
@@ -21,7 +20,6 @@ public class BuyOption {
 
     private BigDecimal percentageDiscount;
 
-    @PositiveOrZero
     private Long quantityCupom;
 
     private ZonedDateTime startDate;
