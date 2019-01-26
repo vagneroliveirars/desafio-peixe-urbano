@@ -1,6 +1,7 @@
 package br.com.peixeurbano.deals.controller;
 
-import br.com.peixeurbano.deals.dto.BuyOptionDTO;
+import br.com.peixeurbano.deals.dto.BuyOptionRequestDTO;
+import br.com.peixeurbano.deals.dto.BuyOptionResponseDTO;
 import br.com.peixeurbano.deals.dto.DealRequestDTO;
 import br.com.peixeurbano.deals.dto.DealResponseDTO;
 import org.junit.jupiter.api.BeforeEach;
@@ -94,7 +95,7 @@ public class DealControllerTest {
         assertEquals(dealRequestDTO.getBuyOptions().size(), dealResponseDTO.getBuyOptions().size());
 
         dealRequestDTO.getBuyOptions().forEach(buyOptionRequestDTO -> {
-            assertTrue(dealResponseDTO.getBuyOptions().stream().anyMatch(buyOptionResponseDTO -> equalsBuyOptions(buyOptionResponseDTO, buyOptionRequestDTO)));
+            assertTrue(dealResponseDTO.getBuyOptions().stream().anyMatch(buyOptionResponseDTO -> equalsBuyOptions(buyOptionRequestDTO, buyOptionResponseDTO)));
         });
 
         List<DealResponseDTO> deals = webTestClient
@@ -140,15 +141,15 @@ public class DealControllerTest {
                 .isNotFound();
     }
 
-    private boolean equalsBuyOptions(BuyOptionDTO buyOption,
-                                     BuyOptionDTO otherBuyOption) {
-        return Objects.equals(buyOption.getTitle(), otherBuyOption.getTitle()) &&
-                buyOption.getNormalPrice().compareTo(otherBuyOption.getNormalPrice()) == 0 &&
-                buyOption.getSalePrice().compareTo(otherBuyOption.getSalePrice()) == 0 &&
-                buyOption.getPercentageDiscount().compareTo(otherBuyOption.getPercentageDiscount()) == 0 &&
-                Objects.equals(buyOption.getQuantityCupom(), otherBuyOption.getQuantityCupom()) &&
-                Objects.equals(buyOption.getStartDate(), otherBuyOption.getStartDate().withZoneSameInstant(buyOption.getStartDate().getZone())) &&
-                Objects.equals(buyOption.getEndDate(), otherBuyOption.getEndDate().withZoneSameInstant(buyOption.getEndDate().getZone()));
+    private boolean equalsBuyOptions(BuyOptionRequestDTO buyOptionRequest,
+                                     BuyOptionResponseDTO buyOptionResponse) {
+        return Objects.equals(buyOptionRequest.getTitle(), buyOptionResponse.getTitle()) &&
+                buyOptionRequest.getNormalPrice().compareTo(buyOptionResponse.getNormalPrice()) == 0 &&
+                buyOptionRequest.getSalePrice().compareTo(buyOptionResponse.getSalePrice()) == 0 &&
+                buyOptionRequest.getPercentageDiscount().compareTo(buyOptionResponse.getPercentageDiscount()) == 0 &&
+                Objects.equals(buyOptionRequest.getQuantityCupom(), buyOptionResponse.getQuantityCupom()) &&
+                Objects.equals(buyOptionRequest.getStartDate(), buyOptionResponse.getStartDate().withZoneSameInstant(buyOptionRequest.getStartDate().getZone())) &&
+                Objects.equals(buyOptionRequest.getEndDate(), buyOptionResponse.getEndDate().withZoneSameInstant(buyOptionRequest.getEndDate().getZone()));
     }
 
 

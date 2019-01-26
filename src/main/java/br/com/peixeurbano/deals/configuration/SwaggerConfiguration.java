@@ -1,5 +1,6 @@
 package br.com.peixeurbano.deals.configuration;
 
+/*
 import com.fasterxml.classmate.TypeResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,14 +15,15 @@ import springfox.documentation.schema.WildcardType;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebFlux;
+*/
 
 import java.util.Collection;
 
-@Configuration
-@EnableSwagger2WebFlux
+//@Configuration
+//@EnableSwagger2WebFlux
 public class SwaggerConfiguration {
 
-    @Bean
+    /*@Bean
     public Docket api(TypeResolver typeResolver) {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
@@ -44,6 +46,6 @@ public class SwaggerConfiguration {
                         AlternateTypeRules.newRule(
                                 typeResolver.resolve(Mono.class, WildcardType.class),
                                 typeResolver.resolve(WildcardType.class)));
-    }
+    }*/
 
 }

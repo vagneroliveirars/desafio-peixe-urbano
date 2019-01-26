@@ -23,7 +23,7 @@ public class DealResponseDTO {
 
     private DealType type;
 
-    private List<BuyOptionDTO> buyOptions;
+    private List<BuyOptionResponseDTO> buyOptions;
 
     public String getId() {
         return id;
@@ -97,11 +97,11 @@ public class DealResponseDTO {
         this.type = type;
     }
 
-    public List<BuyOptionDTO> getBuyOptions() {
+    public List<BuyOptionResponseDTO> getBuyOptions() {
         return buyOptions;
     }
 
-    public void setBuyOptions(List<BuyOptionDTO> buyOptions) {
+    public void setBuyOptions(List<BuyOptionResponseDTO> buyOptions) {
         this.buyOptions = buyOptions;
     }
 

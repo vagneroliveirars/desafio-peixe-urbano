@@ -35,15 +35,7 @@ public class DealController {
                                           ServerHttpRequest httpRequest) {
         return dealService
                 .insert(mapper.map(dealRequestDTO, Deal.class))
-                .map(deal -> {
-                    URI location = UriComponentsBuilder
-                            .fromHttpRequest(httpRequest)
-                            .path("/{id}")
-                            .buildAndExpand(deal.getId())
-                            .toUri();
-
-                    return ResponseEntity.created(location).build();
-                });
+                .map(deal -> ResponseEntity.created(location(httpRequest, deal)).build());
     }
 
     @GetMapping
@@ -64,6 +56,21 @@ public class DealController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Mono<Void> deleteById(@PathVariable String id) {
         return dealService.deleteById(id);
+    }
+
+    @PostMapping("/{id}/options/{optionId}/actions/checkout")
+    public Mono<Deal> checkout(@PathVariable String id,
+                               @PathVariable String optionId) {
+        return dealService.checkout(id, optionId);
+    }
+
+    private URI location(ServerHttpRequest httpRequest,
+                         Deal deal) {
+        return UriComponentsBuilder
+                .fromHttpRequest(httpRequest)
+                .path("/{id}")
+                .buildAndExpand(deal.getId())
+                .toUri();
     }
 
 }

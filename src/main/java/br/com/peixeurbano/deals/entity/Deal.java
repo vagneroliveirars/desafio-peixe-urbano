@@ -2,8 +2,10 @@ package br.com.peixeurbano.deals.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.PositiveOrZero;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -26,10 +28,12 @@ public class Deal {
     @Indexed(unique = true)
     private String url;
 
+    @PositiveOrZero
     private Long totalSold;
 
     private DealType type;
 
+    @DBRef
     private List<BuyOption> buyOptions;
 
     public String getId() {
@@ -110,6 +114,10 @@ public class Deal {
 
     public void setBuyOptions(List<BuyOption> buyOptions) {
         this.buyOptions = buyOptions;
+    }
+
+    public void updateTotalSold(Long quantity) {
+        this.totalSold = totalSold + quantity;
     }
 
 }

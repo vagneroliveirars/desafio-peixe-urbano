@@ -1,9 +1,17 @@
 package br.com.peixeurbano.deals.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.PositiveOrZero;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
+@Document(collection = "buy_options")
 public class BuyOption {
+
+    @Id
+    private String id;
 
     private String title;
 
@@ -13,11 +21,20 @@ public class BuyOption {
 
     private BigDecimal percentageDiscount;
 
+    @PositiveOrZero
     private Long quantityCupom;
 
     private ZonedDateTime startDate;
 
     private ZonedDateTime endDate;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -73,6 +90,10 @@ public class BuyOption {
 
     public void setEndDate(ZonedDateTime endDate) {
         this.endDate = endDate;
+    }
+
+    public void sellUnity(Long quantity) {
+        this.quantityCupom = quantityCupom - quantity;
     }
 
 }

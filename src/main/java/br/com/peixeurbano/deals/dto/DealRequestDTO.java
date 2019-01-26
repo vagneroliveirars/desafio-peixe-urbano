@@ -30,7 +30,7 @@ public class DealRequestDTO {
     private DealType type;
 
     @Valid
-    private List<BuyOptionDTO> buyOptions;
+    private List<BuyOptionRequestDTO> buyOptions;
 
     public String getTitle() {
         return title;
@@ -88,11 +88,11 @@ public class DealRequestDTO {
         this.type = type;
     }
 
-    public List<BuyOptionDTO> getBuyOptions() {
+    public List<BuyOptionRequestDTO> getBuyOptions() {
         return buyOptions;
     }
 
-    public void setBuyOptions(List<BuyOptionDTO> buyOptions) {
+    public void setBuyOptions(List<BuyOptionRequestDTO> buyOptions) {
         this.buyOptions = buyOptions;
     }
 
