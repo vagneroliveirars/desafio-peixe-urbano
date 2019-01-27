@@ -34,6 +34,11 @@ public class Deal {
     @DBRef
     private List<BuyOption> buyOptions;
 
+    public Deal() {
+        this.createDate = ZonedDateTime.now();
+        this.totalSold = 0l;
+    }
+
     public String getId() {
         return id;
     }

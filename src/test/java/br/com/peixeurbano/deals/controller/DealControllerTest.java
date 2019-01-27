@@ -47,6 +47,7 @@ public class DealControllerTest {
             buyOptionDTO.setNormalPrice(new BigDecimal("149.90"));
             buyOptionDTO.setSalePrice(new BigDecimal("99.90"));
             buyOptionDTO.setPercentageDiscount(new BigDecimal("5"));
+            buyOptionDTO.setQuantityCupom(100l);
         });
     }
 
@@ -85,11 +86,11 @@ public class DealControllerTest {
         assertNotNull(dealResponseDTO.getId());
         assertEquals(dealRequestDTO.getTitle(), dealResponseDTO.getTitle());
         assertEquals(dealRequestDTO.getText(), dealResponseDTO.getText());
-        assertEquals(dealRequestDTO.getCreateDate(), dealResponseDTO.getCreateDate().withZoneSameInstant(dealRequestDTO.getCreateDate().getZone()));
+        assertNotNull(dealResponseDTO.getCreateDate());
         assertEquals(dealRequestDTO.getPublishDate(), dealResponseDTO.getPublishDate().withZoneSameInstant(dealRequestDTO.getPublishDate().getZone()));
         assertEquals(dealRequestDTO.getEndDate(), dealResponseDTO.getEndDate().withZoneSameInstant(dealRequestDTO.getEndDate().getZone()));
         assertNotNull(dealResponseDTO.getUrl());
-        assertEquals(dealRequestDTO.getTotalSold(), dealResponseDTO.getTotalSold());
+        assertNotNull(dealResponseDTO.getTotalSold());
         assertEquals(dealRequestDTO.getType(), dealResponseDTO.getType());
         assertNotNull(dealResponseDTO.getBuyOptions());
         assertEquals(dealRequestDTO.getBuyOptions().size(), dealResponseDTO.getBuyOptions().size());
@@ -117,11 +118,11 @@ public class DealControllerTest {
         assertTrue(anyDeal.isPresent());
         assertEquals(dealRequestDTO.getTitle(), anyDeal.get().getTitle());
         assertEquals(dealRequestDTO.getText(), anyDeal.get().getText());
-        assertEquals(dealRequestDTO.getCreateDate(), anyDeal.get().getCreateDate().withZoneSameInstant(dealRequestDTO.getCreateDate().getZone()));
+        assertNotNull(anyDeal.get().getCreateDate());
         assertEquals(dealRequestDTO.getPublishDate(), anyDeal.get().getPublishDate().withZoneSameInstant(dealRequestDTO.getPublishDate().getZone()));
         assertEquals(dealRequestDTO.getEndDate(), anyDeal.get().getEndDate().withZoneSameInstant(dealRequestDTO.getEndDate().getZone()));
         assertNotNull(anyDeal.get().getUrl());
-        assertEquals(dealRequestDTO.getTotalSold(), anyDeal.get().getTotalSold());
+        assertNotNull(anyDeal.get().getTotalSold());
         assertEquals(dealRequestDTO.getType(), anyDeal.get().getType());
         assertNotNull(anyDeal.get().getBuyOptions());
         assertEquals(dealRequestDTO.getBuyOptions().size(), anyDeal.get().getBuyOptions().size());
