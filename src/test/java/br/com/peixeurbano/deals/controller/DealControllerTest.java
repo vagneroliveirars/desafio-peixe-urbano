@@ -14,9 +14,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.math.BigDecimal;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -140,6 +142,85 @@ public class DealControllerTest {
                 .exchange()
                 .expectStatus()
                 .isNotFound();
+    }
+
+    @Test
+    @DisplayName("Checkout test")
+    public void checkout() {
+        BuyOptionRequestDTO buyOptionRequest = random(BuyOptionRequestDTO.class);
+        buyOptionRequest.setNormalPrice(new BigDecimal("149.90"));
+        buyOptionRequest.setSalePrice(new BigDecimal("99.90"));
+        buyOptionRequest.setPercentageDiscount(new BigDecimal("5"));
+        buyOptionRequest.setQuantityCupom(100l);
+
+        dealRequestDTO.setBuyOptions(Arrays.asList(buyOptionRequest));
+
+        URI location = webTestClient
+                .post()
+                .uri(DEALS_URI)
+                .syncBody(dealRequestDTO)
+                .exchange()
+                .expectStatus()
+                .isCreated()
+                .expectHeader()
+                .exists("Location")
+                .returnResult(String.class)
+                .getResponseHeaders()
+                .getLocation();
+
+        assertNotNull(location);
+        assertNotNull(location.getPath());
+
+        DealResponseDTO dealResponseDTO = webTestClient
+                .get()
+                .uri(location)
+                .exchange()
+                .expectStatus()
+                .isOk()
+                .expectHeader()
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .expectBody(DealResponseDTO.class)
+                .returnResult()
+                .getResponseBody();
+
+        assertNotNull(dealResponseDTO);
+        assertNotNull(dealResponseDTO.getId());
+        assertEquals(dealRequestDTO.getTitle(), dealResponseDTO.getTitle());
+        assertEquals(dealRequestDTO.getText(), dealResponseDTO.getText());
+        assertNotNull(dealResponseDTO.getCreateDate());
+        assertEquals(dealRequestDTO.getPublishDate(), dealResponseDTO.getPublishDate().withZoneSameInstant(dealRequestDTO.getPublishDate().getZone()));
+        assertEquals(dealRequestDTO.getEndDate(), dealResponseDTO.getEndDate().withZoneSameInstant(dealRequestDTO.getEndDate().getZone()));
+        assertNotNull(dealResponseDTO.getUrl());
+        assertNotNull(dealResponseDTO.getTotalSold());
+        assertEquals(dealRequestDTO.getType(), dealResponseDTO.getType());
+        assertNotNull(dealResponseDTO.getBuyOptions());
+        assertEquals(dealRequestDTO.getBuyOptions().size(), dealResponseDTO.getBuyOptions().size());
+
+        URI checkoutUri = UriComponentsBuilder
+                .fromPath(location.getPath())
+                .path("/options/{optionId}/actions/checkout")
+                .buildAndExpand(dealResponseDTO.getBuyOptions().get(0).getId())
+                .toUri();
+
+        DealResponseDTO dealCheckout = webTestClient
+                .post()
+                .uri(checkoutUri)
+                .exchange()
+                .expectStatus()
+                .isOk()
+                .expectHeader()
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .expectBody(DealResponseDTO.class)
+                .returnResult()
+                .getResponseBody();
+
+        assertNotNull(dealCheckout);
+        assertEquals(dealResponseDTO.getId(), dealCheckout.getId());
+        assertEquals(dealResponseDTO.getTotalSold().longValue() + 1, dealCheckout.getTotalSold().longValue());
+        assertNotNull(dealCheckout.getBuyOptions());
+        assertEquals(dealResponseDTO.getBuyOptions().size(), dealCheckout.getBuyOptions().size());
+        assertEquals(dealResponseDTO.getBuyOptions().get(0).getId(), dealCheckout.getBuyOptions().get(0).getId());
+        assertEquals(dealResponseDTO.getBuyOptions().get(0).getQuantityCupom().longValue() - 1l, dealCheckout.getBuyOptions().get(0).getQuantityCupom().longValue());
     }
 
     private boolean equalsBuyOptions(BuyOptionRequestDTO buyOptionRequest,
