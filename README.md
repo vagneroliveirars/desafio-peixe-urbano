@@ -12,16 +12,14 @@ Neste projeto foi utilizado o MongoDB embarcado, então não há necessidade ins
 
 Os dados ficam em memória e são perdidos quando a aplicação é encerrada.
 
-Caso queira utilizar um MongoDB local:
+Caso prefira utilizar um MongoDB local:
 
-Descomentar as configurações do Mongo em /src/main/resources/application.properties
+* Descomentar as configurações do Mongo em /src/main/resources/application.properties.
+* Alterar a linha abaixo em dependencies.gradle:
+    * de implementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo:$flapdoodleEmbeddedMongoDB_version")
+    * para testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo:$flapdoodleEmbeddedMongoDB_version")
 
-Alterar a linha abaixo em dependencies.gradle:
-
-* de implementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo:$flapdoodleEmbeddedMongoDB_version")
-* para testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo:$flapdoodleEmbeddedMongoDB_version")
-
-Para clonar o projeto localmente:
+Para clonar o projeto:
 
 `$> git clone https://github.com/vagneroliveirars/ofertas-peixe-urbano-api.git`
 
