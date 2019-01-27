@@ -85,4 +85,10 @@ public class BuyOptionResponseDTO {
         this.endDate = endDate;
     }
 
+    public Boolean isAvailable() {
+        return this.startDate.isBefore(ZonedDateTime.now())
+                && this.endDate.isAfter(ZonedDateTime.now())
+                && this.quantityCupom > 0l;
+    }
+
 }

@@ -105,4 +105,12 @@ public class DealResponseDTO {
         this.buyOptions = buyOptions;
     }
 
+    public Boolean isAvailable() {
+        return this.publishDate.isBefore(ZonedDateTime.now())
+                && this.endDate.isAfter(ZonedDateTime.now())
+                && this.buyOptions != null
+                && !this.buyOptions.isEmpty()
+                && this.buyOptions.stream().anyMatch(BuyOptionResponseDTO::isAvailable);
+    }
+
 }
