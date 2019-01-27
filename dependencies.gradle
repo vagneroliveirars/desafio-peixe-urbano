@@ -21,9 +21,9 @@ dependencies {
 
     implementation("ma.glasnost.orika:orika-core:$orika_version")
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo:$flapdoodleEmbeddedMongoDB_version")
 
-    testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo:$flapdoodleEmbeddedMongoDB_version")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     testImplementation("io.github.benas:random-beans:$randomBeans_version")
 

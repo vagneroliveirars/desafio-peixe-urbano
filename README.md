@@ -8,6 +8,19 @@ Microservice Spring Boot para publicação de ofertas e suas respectivas opçõe
 * [Gradle (build tool)](https://gradle.org/)
 * [MongoDB](https://www.mongodb.com)
 
+Neste projeto foi utilizado o MongoDB em embarcado, então não há necessidade instalar o MongoDB localmente.
+
+Os dados ficam em memória e são perdidos quando a aplicação é encerrada.
+
+Caso queira utilizar um MongoDB local:
+
+Descomentar as configurações do Mongo em /src/main/resources/application.properties
+
+Alterar a linha abaixo em dependencies.gradle:
+
+* de implementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo:$flapdoodleEmbeddedMongoDB_version")
+* para testImplementation("de.flapdoodle.embed:de.flapdoodle.embed.mongo:$flapdoodleEmbeddedMongoDB_version")
+
 Para clonar o projeto localmente:
 
 `$> git clone https://github.com/vagneroliveirars/ofertas-peixe-urbano-api.git`
