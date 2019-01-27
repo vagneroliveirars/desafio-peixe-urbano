@@ -15,9 +15,9 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
 
-//    implementation("io.springfox:springfox-swagger2:$springFox_version")
-//    implementation("io.springfox:springfox-swagger-ui:$springFox_version")
-//    implementation("io.springfox:springfox-spring-webflux:$springFox_version")
+    implementation("io.springfox:springfox-swagger2:$springFox_version")
+    implementation("io.springfox:springfox-swagger-ui:$springFox_version")
+    implementation("io.springfox:springfox-spring-webflux:$springFox_version")
 
     implementation("ma.glasnost.orika:orika-core:$orika_version")
 

@@ -13,6 +13,7 @@ repositories {
     jcenter()
     mavenCentral()
     mavenLocal()
+    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
 }
 
 // Importing configurations
