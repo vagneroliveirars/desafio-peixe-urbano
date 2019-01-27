@@ -8,7 +8,7 @@ Microservice Spring Boot para publicação de ofertas e suas respectivas opçõe
 * [Gradle (build tool)](https://gradle.org/)
 * [MongoDB](https://www.mongodb.com)
 
-Neste projeto foi utilizado o MongoDB em embarcado, então não há necessidade instalar o MongoDB localmente.
+Neste projeto foi utilizado o MongoDB embarcado, então não há necessidade instalar o MongoDB localmente.
 
 Os dados ficam em memória e são perdidos quando a aplicação é encerrada.
 
