@@ -59,6 +59,7 @@ public class DealService {
     }
 
     private String buildUniqueUrl() {
+        //TODO build unique url based on deal's title
         return UUID.randomUUID().toString();
     }
 
