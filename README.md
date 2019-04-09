@@ -1,4 +1,4 @@
-# desafio-peixe-urbano
+# ofertas-api
 
 Microservice Spring Boot para publicação de ofertas e suas respectivas opções de compra
 
@@ -21,7 +21,7 @@ Caso prefira utilizar um MongoDB local:
 
 Para clonar o projeto:
 
-`$> git clone https://github.com/vagneroliveirars/ofertas-peixe-urbano-api.git`
+`$> git clone https://github.com/vagneroliveirars/ofertas-api.git`
 
 ## Build
 
